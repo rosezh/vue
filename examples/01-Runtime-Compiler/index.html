@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hello vue</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <p>hello world</p>
+        <h1>{{msg}}</h1>
+        {{msg}}
+        <p>{{count}}</p> -->
+
+
+        <!-- <p>
+          {{obj.title}}
+          <hr>
+          {{obj.name}}
+        </p>
+        {{arr}} -->
+
+        {{}}
+    </div>
+
+  <script src="../../dist/vue.js"></script>
+  <script>
+    /* //   template 和 render同时设置，先执行哪一个？
+    const vm = new Vue({
+      el: '#app',
+      template:'<h1>hello template</h1>',
+      render(h){
+          return h('h1','hello render')
+      }
+    }) */
+    /* 首次渲染过程 */
+    /* const vm = new Vue({
+      el: '#app',
+      data:{
+        msg:'Hello Vue'
+      }
+    }) */
+
+    // 收集依赖
+    // const vm = new Vue({
+    //   el: '#app',
+    //   data:{
+    //     msg:'Hello Vue',
+    //     count:100
+    //   }
+    // }) 
+    /* 断点设置到创建Watcher对象的时候 */
+
+    // const vm = new Vue({
+    //   el: '#app',
+    //   data:{
+    //     obj:{
+    //       title:'hello world'
+    //     },
+    //     arr:[2,3,5]
+    //   }
+    // }) 
+    /* 
+      vm.arr   打印
+      vm.arr.push(100),视图会正常更新
+      vm.arr[0] = 100 || vm.arr.length=0,数据更新，视图并没有相应更新，因为没有对数组的属性进行响应式处理，只是对元素进行了响应式处理
+      vm.arr.splice(0,1,100)
+      vm.arr.splice(0)//删除数组中的元素
+    */
+
+    const vm = new Vue({
+      el: '#app',
+      data:{
+        user:{
+          firstName:'jack',
+          secondName:'ben',
+          fullName:''
+        }
+      }
+    }) 
+    vm.$watch(user,(newVal,oldVal)=>{
+
+    })
+  </script>
+</body>
+</html>
