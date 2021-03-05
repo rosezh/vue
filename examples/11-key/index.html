@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hello vue</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="handler">click me</button>
+        <ul>
+            <!-- <li v-for="value in arr">{{value}}</li> -->
+            <li v-for="value in arr" :key="value">{{value}}</li>
+        </ul>
+    </div>
+
+  <script src="../../dist/vue.js"></script>
+  <script>
+
+    const vm = new Vue({
+      el: '#app',
+      data:{
+        arr:['a','b','c','d']
+      },
+      methods:{
+          handler(){
+              this.arr.splice(1,0,'x')
+          }
+      }
+    }) 
+// 对比设置key与不设置key的差异
+    /* 
+    断点：
+    src/core/vdom/patch.js    updataChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly)设置断点1
+    点击按钮，观察oldCh,此时的节点不是li,f8向后执行，直到找到li
+    找到对比新老节点对比差异的地方,设置断点2
+    */
+  </script>
+</body>
+</html>
