@@ -70,7 +70,7 @@ if (inBrowser && !isIE) {
  */
 function flushSchedulerQueue () {
   currentFlushTimestamp = getNow()
-  flushing = true
+  flushing = true 
   let watcher, id
 
   // Sort queue before flush.
@@ -165,7 +165,8 @@ export function queueWatcher (watcher: Watcher) {
   const id = watcher.id
   if (has[id] == null) {
     has[id] = true
-    if (!flushing) {
+    if (!flushing) {//没有被处理
+      // flushing 正在刷新，
       queue.push(watcher)
     } else {
       // if already flushing, splice the watcher based on its id

@@ -111,6 +111,7 @@ function initProps (vm: Component, propsOptions: Object) {
 
 function initData (vm: Component) {
   let data = vm.$options.data
+  // 组件中的data是函数，实例上的data是对象
   data = vm._data = typeof data === 'function'
     ? getData(data, vm)
     : data || {}
@@ -148,7 +149,7 @@ function initData (vm: Component) {
     }
   }
   // observe data
-  observe(data, true /* asRootData */)
+  observe(data, true /* asRootData */)//响应式处理的入口
 }
 
 export function getData (data: Function, vm: Component): any {
@@ -337,8 +338,8 @@ export function stateMixin (Vue: Class<Component>) {
     }
   }
   Object.defineProperty(Vue.prototype, '$data', dataDef)
-  Object.defineProperty(Vue.prototype, '$props', propsDef)
-
+  Object.defineProperty(Vue.prototype, '$props', propsDef) 
+// 实例方法
   Vue.prototype.$set = set
   Vue.prototype.$delete = del
 

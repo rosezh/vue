@@ -53,7 +53,7 @@ export default class Watcher {
     if (isRenderWatcher) {
       vm._watcher = this
     }
-    vm._watchers.push(this)
+    vm._watchers.push(this)//存储所有watcher
     // options
     if (options) {
       this.deep = !!options.deep
@@ -167,7 +167,7 @@ export default class Watcher {
       this.dirty = true
     } else if (this.sync) {
       this.run()
-    } else {
+    } else {//渲染watcher执行
       queueWatcher(this)
     }
   }

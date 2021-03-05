@@ -27,19 +27,20 @@ Vue.config.getTagNamespace = getTagNamespace
 Vue.config.isUnknownElement = isUnknownElement
 
 // install platform runtime directives & components
-extend(Vue.options.directives, platformDirectives)
-extend(Vue.options.components, platformComponents)
+extend(Vue.options.directives, platformDirectives) //全局的指令
+extend(Vue.options.components, platformComponents) //全局的组件
+// extend第二个参数的成员复制到第一个参数，复制对象成员的功能
 
 // install platform patch function
-Vue.prototype.__patch__ = inBrowser ? patch : noop
+Vue.prototype.__patch__ = inBrowser ? patch : noop //注册patch函数  浏览器环境直接返回patch函数，非浏览器环境返回noop  export const inBrowser = typeof window !== 'undefined'
 
-// public mount method
+// public mount method  把dom渲染到页面上来
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
   el = el && inBrowser ? query(el) : undefined
-  return mountComponent(this, el, hydrating)
+  return mountComponent(this, el, hydrating)//渲染dom
 }
 
 // devtools global hook

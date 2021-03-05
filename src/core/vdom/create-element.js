@@ -26,6 +26,8 @@ const ALWAYS_NORMALIZE = 2
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
 export function createElement (
+  //处理参数，既可以传2个参数，又可以传3个参数
+  // 处理最后一个参数，true为用户的render function,false模板编译
   context: Component,
   tag: any,
   data: any,
@@ -41,9 +43,10 @@ export function createElement (
   if (isTrue(alwaysNormalize)) {
     normalizationType = ALWAYS_NORMALIZE
   }
-  return _createElement(context, tag, data, children, normalizationType)
+  return _createElement(context, tag, data, children, normalizationType)//
 }
 
+// 创建vnode
 export function _createElement (
   context: Component,
   tag?: string | Class<Component> | Function | Object,
@@ -60,12 +63,12 @@ export function _createElement (
     return createEmptyVNode()
   }
   // object syntax in v-bind
-  if (isDef(data) && isDef(data.is)) {
+  if (isDef(data) && isDef(data.is)) {//此处的is 为is指令
     tag = data.is
   }
   if (!tag) {
     // in case of component :is set to falsy value
-    return createEmptyVNode()
+    return createEmptyVNode()//返回空的vnode节点
   }
   // warn against non-primitive key
   if (process.env.NODE_ENV !== 'production' &&
@@ -87,6 +90,7 @@ export function _createElement (
     data.scopedSlots = { default: children[0] }
     children.length = 0
   }
+  //此时是用户传入的render function
   if (normalizationType === ALWAYS_NORMALIZE) {
     children = normalizeChildren(children)
   } else if (normalizationType === SIMPLE_NORMALIZE) {

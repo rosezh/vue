@@ -36,6 +36,7 @@ export default class Dep {
 
   notify () {
     // stabilize the subscriber list first
+    // 先把subs数组克隆一份
     const subs = this.subs.slice()
     if (process.env.NODE_ENV !== 'production' && !config.async) {
       // subs aren't sorted in scheduler if not running async

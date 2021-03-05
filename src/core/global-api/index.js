@@ -19,7 +19,7 @@ import {
 } from '../util/index'
 
 export function initGlobalAPI (Vue: GlobalAPI) {
-  // config
+  // config 初始化Vue.config
   const configDef = {}
   configDef.get = () => config
   if (process.env.NODE_ENV !== 'production') {
@@ -29,7 +29,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
       )
     }
   }
-  Object.defineProperty(Vue, 'config', configDef)
+  Object.defineProperty(Vue, 'config', configDef)//定义config属性
 
   // exposed util methods.
   // NOTE: these are not considered part of the public API - avoid relying on
@@ -40,7 +40,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     mergeOptions,
     defineReactive
   }
-
+//静态方法
   Vue.set = set
   Vue.delete = del
   Vue.nextTick = nextTick
@@ -51,17 +51,24 @@ export function initGlobalAPI (Vue: GlobalAPI) {
     return obj
   }
 
-  Vue.options = Object.create(null)
+  Vue.options = Object.create(null) //设置Vue.options的原型为null（可以提高性能）,此对象不需要原型
+  
+  /* ASSET_TYPES = [
+  'component',
+  'directive',
+  'filter'
+] */
+//存储Vue.options.components,Vue.options.directives,Vue.options.filters
   ASSET_TYPES.forEach(type => {
     Vue.options[type + 's'] = Object.create(null)
   })
 
   // this is used to identify the "base" constructor to extend all plain-object
   // components with in Weex's multi-instance scenarios.
-  Vue.options._base = Vue
+  Vue.options._base = Vue//存储Vue构造函数
 
-  extend(Vue.options.components, builtInComponents)
-
+  extend(Vue.options.components, builtInComponents)//注册内置组件keep-alive
+//以下给Vue构造函数注册全局成员
   initUse(Vue)
   initMixin(Vue)
   initExtend(Vue)

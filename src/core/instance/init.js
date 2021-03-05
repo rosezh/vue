@@ -27,7 +27,7 @@ export function initMixin (Vue: Class<Component>) {
     }
 
     // a flag to avoid this being observed
-    vm._isVue = true
+    vm._isVue = true//如果是Vue实例，不需要被observe
     // merge options
     if (options && options._isComponent) {
       // optimize internal component instantiation
